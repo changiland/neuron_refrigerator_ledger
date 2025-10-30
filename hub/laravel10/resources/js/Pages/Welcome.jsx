@@ -1,63 +1,61 @@
 import { Link, Head } from '@inertiajs/react';
-
+import MainLayout from '@/Layouts/MainLayout';
+import IntroPhoto from '@/Images/IntrodutionPhoto.jpg';
+import funcPhoto from '@/Images/functionphoto.webp';
+import News from '@/Components/News';
+import { Route } from 'react-router-dom';
+import Register from './Auth/Register(old)';
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (
         <>
-            <Head title="Welcome" />
-            <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
-                    {auth.user ? (
-                        <Link
-                            href={route('dashboard')}
-                            className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                        >
-                            Dashboard
-                        </Link>
-                    ) : (
-                        <>
-                            <Link
-                                href={route('login')}
-                                className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                            >
-                                Log in
-                            </Link>
+            <Head title="ホームページ" />
+            < MainLayout>
+                <main className="flex flex-col items-center justify-center pt-[5em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto ">
 
-                            <Link
-                                href={route('register')}
-                                className="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                            >
-                                Register
-                            </Link>
-                        </>
-                    )}
-                </div>
+                    <div className='relative bg-cover bg-center w-full h-[55vw] max-h-[45em] flex flex-col justify-end' style={{ backgroundImage: `url(${IntroPhoto})`}}>
 
-                <div className="min-h-screen flex items-center justify-center bg-gray-100">
-                    <h1 className="text-4xl font-bold text-blue-600">
-                        Hello React in Laravel!
-                    </h1>
+                        <div className='absolute flex items-center justify-center w-[70%] h-[25%] bg-[rgba(1,2,32,0.59)] text-white text-[7vw] sm:text-[5vw] top-[10px] '>
+                            <p>節約、簡単、未来</p>
+                        </div>
 
-                    <Link
-                        href="/about"
-                        className="text-blue-500 underline hover:text-blue-700"
-                    >
-                        Go to About Page
-                    </Link>
-                </div>
+                        <div className='absolute flex items-center justify-center w-[70%] h-[40%] bg-[rgba(1,2,32,0.59)] text-white text-[4vw] sm:text-[3vw] bottom-[10px] right-0'>
+                            <p>
+                                貯金節約の新たな生活を作る<br></br>
+                                一目で簡単に確認できる機能<br></br>
+                                緑の循環にする環境の守り
+                            </p>
+                        </div>
 
+                    </div>
 
-            </div>
+                    <div className=" text-3xl font-bold text-gray-800 w-[80%] h-[10vw] text-center ">
+                        <button className='shadow-xl w-[80%] h-full bg-white rounded-[20px] text-[7vw] sm:text-[5vw]'><Link href={route('register')}>すぐに始める!</Link></button>
+                    </div>
 
-            <style>{`
-                .bg-dots-darker {
-                    background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(0,0,0,0.07)'/%3E%3C/svg%3E");
-                }
-                @media (prefers-color-scheme: dark) {
-                    .dark\\:bg-dots-lighter {
-                        background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E");
-                    }
-                }
-            `}</style>
+                    <div className='relative bg-cover bg-center w-full h-[55vw] max-h-[45em] flex flex-col justify-end' style={{ backgroundImage: `url(${funcPhoto})`}}>
+
+                        <div className='absolute flex items-center justify-center md:w-[19vw] md:h-[19vw] w-[25vw] h-[25vw] bg-[rgba(1,2,32,0.59)] text-white text-[6vw] sm:text-[3vw] top-0 right-0 '>
+                            <p>在庫食材</p>
+                        </div>
+
+                        <div className='absolute flex items-center justify-center md:w-[19vw] md:h-[19vw] w-[25vw] h-[25vw] bg-[rgba(1,2,32,0.59)] text-white text-[6vw] sm:text-[3vw] top-[26vw] md:top-[19.1vw] right-0'>
+                            <p>入荷履歴</p>
+                        </div>
+
+                        <div className='absolute flex items-center justify-center md:w-[19vw] md:h-[19vw] w-[25vw] h-[25vw] bg-[rgba(1,2,32,0.59)] text-white text-[6vw] sm:text-[3vw] top-0 right-[26vw]  md:right-[19.1vw]'>
+                            <p>当月支払</p>
+                        </div>
+                    </div>
+
+                    <div className=" text-3xl font-bold text-gray-800 w-[80%] h-[10vw] text-center ">
+                        <button className='shadow-xl w-[80%] h-full bg-white rounded-[20px] text-[7vw] sm:text-[5vw]'><Link>問い合わせ</Link></button>
+                    </div>
+
+                    <News />
+                </main>
+            </MainLayout>
         </>
+
+
     );
 }
