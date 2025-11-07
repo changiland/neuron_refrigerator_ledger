@@ -2,7 +2,7 @@ import { Link, Head } from '@inertiajs/react';
 import MainLayout from '@/Layouts/MainLayout';
 import IntroPhoto from '@/Images/IntrodutionPhoto.jpg';
 import funcPhoto from '@/Images/functionphoto.webp';
-import News from '@/Components/News';
+import News from '@/Components/NewsComp';
 import { Route } from 'react-router-dom';
 import Register from './Auth/Register(old)';
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
@@ -35,23 +35,23 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     <div className='relative bg-cover bg-center w-full h-[55vw] max-h-[45em] flex flex-col justify-end' style={{ backgroundImage: `url(${funcPhoto})`}}>
 
                         <div className='absolute flex items-center justify-center md:w-[19vw] md:h-[19vw] w-[25vw] h-[25vw] bg-[rgba(1,2,32,0.59)] text-white text-[6vw] sm:text-[3vw] top-0 right-0 '>
-                            <p>在庫食材</p>
+                            <p><Link href={route('MyStock')}>在庫食材</Link></p>
                         </div>
 
                         <div className='absolute flex items-center justify-center md:w-[19vw] md:h-[19vw] w-[25vw] h-[25vw] bg-[rgba(1,2,32,0.59)] text-white text-[6vw] sm:text-[3vw] top-[26vw] md:top-[19.1vw] right-0'>
-                            <p>入荷履歴</p>
+                            <p><Link href={route('ArrivalHistory')}>入荷履歴</Link></p>
                         </div>
 
                         <div className='absolute flex items-center justify-center md:w-[19vw] md:h-[19vw] w-[25vw] h-[25vw] bg-[rgba(1,2,32,0.59)] text-white text-[6vw] sm:text-[3vw] top-0 right-[26vw]  md:right-[19.1vw]'>
-                            <p>当月支払</p>
+                            <p> <Link href={route('CostsHistory')}>当月支払</Link></p>
                         </div>
                     </div>
 
                     <div className=" text-3xl font-bold text-gray-800 w-[80%] h-[10vw] text-center ">
-                        <button className='shadow-xl w-[80%] h-full bg-white rounded-[20px] text-[7vw] sm:text-[5vw]'><Link>問い合わせ</Link></button>
+                        <button className='shadow-xl w-[80%] h-full bg-white rounded-[20px] text-[7vw] sm:text-[5vw]'><Link href={route('QandA')}>問い合わせ</Link></button>
                     </div>
 
-                    <News />
+                    <News/>
                 </main>
             </MainLayout>
         </>
