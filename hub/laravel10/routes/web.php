@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EventController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -49,9 +50,7 @@ Route::get('/MyStock/ArrivalHistory', function () {
     return Inertia::render('Auth/ArrivalHistory');
 })->name('ArrivalHistory');
 
-Route::get('/MyStock/ArrivalHistory', function () {
-    return Inertia::render('Auth/ArrivalHistory');
-})->name('ArrivalHistory');
+Route::get('/MyStock/ArrivalHistory/ArrivalDetail', [EventController::class, 'index'])->name('ArrivalDetail');
 
 Route::get('/MyStock/CostsHistory', function () {
     return Inertia::render('Auth/CostsHistory');
