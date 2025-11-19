@@ -5,12 +5,12 @@ import Footer from '../Components/Footer';
 
 
 
-export default function MainLayout({children}) {
+export default function MainLayout({children, auth}) {
     return (
         <>
             {/* Main Layout */}
             <Backerground>
-                <Header />
+                <Header auth={auth} />
                     {children}
                 <Footer />
             </Backerground>

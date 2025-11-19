@@ -50,7 +50,7 @@ export default function ArrivalHistory({ auth }) {
     return (
         <>
             <Head title="当月支払" />
-            <MainLayout>
+            <MainLayout auth={auth}>
                 <main className="relative flex flex-col items-center  pt-[5em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto h-full ">
                     <h2 className="text-2xl font-bold mb-4">当月支払</h2>
                     <div className="w-full">

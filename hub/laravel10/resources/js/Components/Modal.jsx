@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-
+//Modal（彈窗）元件
 export default function Modal({ children, show = false, maxWidth = '2xl', closeable = true, onClose = () => {} }) {
     const close = () => {
         if (closeable) {

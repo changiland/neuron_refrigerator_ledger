@@ -3,7 +3,7 @@ import MainLayout from '@/Layouts/MainLayout';
 
 
 
-export default function QandA() {
+export default function QandA({auth}) {
 
     const categoryLabels = {
         general: "一般質問",
@@ -31,7 +31,7 @@ export default function QandA() {
     return (
         <>
             <Head title="Q&Aページ" />
-            <MainLayout>
+            <MainLayout auth={auth}>
                 <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 mt-10">
                     <h1 className="text-3xl font-bold mb-6">Q&A Page</h1>
                     {Object.entries(data).map(([category, items]) => (

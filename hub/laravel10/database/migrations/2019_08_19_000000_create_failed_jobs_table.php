@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * 失敗的隊列任務（Queue Jobs）
      */
     public function up(): void
     {

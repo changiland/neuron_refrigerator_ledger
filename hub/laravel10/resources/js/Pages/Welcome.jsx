@@ -3,13 +3,11 @@ import MainLayout from '@/Layouts/MainLayout';
 import IntroPhoto from '@/Images/IntrodutionPhoto.jpg';
 import funcPhoto from '@/Images/functionphoto.webp';
 import News from '@/Components/NewsComp';
-import { Route } from 'react-router-dom';
-import Register from './Auth/Register(old)';
-export default function Welcome({ auth, laravelVersion, phpVersion }) {
+export default function Welcome(auth) {
     return (
         <>
             <Head title="ホームページ" />
-            < MainLayout>
+            < MainLayout auth={auth}>
                 <main className="flex flex-col items-center justify-center pt-[5em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto ">
 
                     <div className='relative bg-cover bg-center w-full h-[55vw] max-h-[45em] flex flex-col justify-end' style={{ backgroundImage: `url(${IntroPhoto})`}}>
@@ -35,15 +33,15 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     <div className='relative bg-cover bg-center w-full h-[55vw] max-h-[45em] flex flex-col justify-end' style={{ backgroundImage: `url(${funcPhoto})`}}>
 
                         <div className='absolute flex items-center justify-center md:w-[19vw] md:h-[19vw] w-[25vw] h-[25vw] bg-[rgba(1,2,32,0.59)] text-white text-[6vw] sm:text-[3vw] top-0 right-0 '>
-                            <p><Link href={route('MyStock')}>在庫食材</Link></p>
+                            <p>在庫食材</p>
                         </div>
 
                         <div className='absolute flex items-center justify-center md:w-[19vw] md:h-[19vw] w-[25vw] h-[25vw] bg-[rgba(1,2,32,0.59)] text-white text-[6vw] sm:text-[3vw] top-[26vw] md:top-[19.1vw] right-0'>
-                            <p><Link href={route('ArrivalHistory')}>入荷履歴</Link></p>
+                            <p>入荷履歴</p>
                         </div>
 
                         <div className='absolute flex items-center justify-center md:w-[19vw] md:h-[19vw] w-[25vw] h-[25vw] bg-[rgba(1,2,32,0.59)] text-white text-[6vw] sm:text-[3vw] top-0 right-[26vw]  md:right-[19.1vw]'>
-                            <p> <Link href={route('CostsHistory')}>当月支払</Link></p>
+                            <p>当月支払</p>
                         </div>
                     </div>
 

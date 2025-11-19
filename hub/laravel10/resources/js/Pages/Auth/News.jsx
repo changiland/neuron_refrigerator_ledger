@@ -5,11 +5,11 @@ import MainLayout from '@/Layouts/MainLayout';
 
 
 
-export default function News() {
+export default function News({auth}) {
     return (
         <>
             <Head title="お知らせ" />
-            <MainLayout>
+            <MainLayout auth={auth}>
                 <div>
                     <table className=' table-fixed shadow-xl w-[90vw] sm:w-[80vw] sm:max-w-[1000px] rounded-[15px] bg-gray-100 '>
                         <caption className='bg-blue-100 border-b-[1px] border-white rounded-t-[15px]'>最新情報</caption>

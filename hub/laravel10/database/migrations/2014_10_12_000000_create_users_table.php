@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->id(); // 自動遞增主鍵
+            $table->string('name'); // 使用者名稱
+            $table->string('email')->unique(); // 電子郵件，唯一值
+            $table->timestamp('email_verified_at')->nullable(); // 電子郵件驗證時間
+            $table->string('password'); // 密碼
+            $table->string('image_path')->nullable(); // 使用者頭像圖片路徑
+            $table->rememberToken(); // 支援 「記住我（Remember Me）」功能 的欄位
+            $table->timestamps();  // 建立和更新時間戳記
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('users'); // 刪除 users 資料表
     }
 };

@@ -1,5 +1,4 @@
-// 你的專案 LOGO 元件 resources/js/Components/ApplicationLogo.jsx
-import ApplicationLogo from '@/Components/ApplicationLogo';
+
 // Inertia.js 的 <Link> 元件（代替 <a> 標籤）作用是「不重新載入頁面」地在前端切換路由。
 import { Link } from '@inertiajs/react';
 

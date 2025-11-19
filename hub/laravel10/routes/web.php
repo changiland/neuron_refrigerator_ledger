@@ -5,6 +5,10 @@ use App\Http\Controllers\EventController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,25 +26,50 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('Welcome');
 
+// 註冊 Page
 Route::get('/Register', function () {
     return Inertia::render('Auth/Register');
-})->name('register');
+})->name('Register');
 
-Route::get('/QandA', function () {
-    return Inertia::render('Auth/QandA');
-})->name('QandA');
+Route::get('/register', [RegisteredUserController::class, 'create'])->middleware('guest')->name('register');
 
+Route::post('/register', [RegisteredUserController::class, 'store'])->middleware('guest');
+
+Route::get('/email/verify', function () {
+    return Inertia::render('Auth/VerifyEmail');
+})->middleware(['auth'])->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill(); // 標記 email_verified_at
+    return redirect('/MyStock');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+// 登入 Page
 Route::get('/Login', function () {
     return Inertia::render('Auth/Login');
 })->name('Login');
 
+Route::get('/login', function () {
+    return Inertia::render('Auth/Login');
+})->name('login');
+
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
+
+//
+Route::get('/MyStock', function () {
+    return Inertia::render('Auth/MyStock');
+})->middleware(['auth', 'verified'])->name('MyStock');
+
+//
 Route::get('/News', function () {
     return Inertia::render('Auth/News');
 })->name('News');
 
-Route::get('/MyStock', function () {
-    return Inertia::render('Auth/MyStock');
-})->name('MyStock');
+
 
 Route::get('/MyStock/StockInfo', function () {
     return Inertia::render('Auth/StockInfo');
@@ -56,24 +85,6 @@ Route::get('/MyStock/CostsHistory', function () {
     return Inertia::render('Auth/CostsHistory');
 })->name('CostsHistory');
 
-/*Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});*/
-
-require __DIR__.'/auth.php';
+Route::get('/QandA', function () {
+    return Inertia::render('Auth/QandA');
+})->name('QandA');

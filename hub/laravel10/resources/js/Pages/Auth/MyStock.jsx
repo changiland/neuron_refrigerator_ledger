@@ -8,7 +8,7 @@ export default function MyStock({ auth }) {
     return (
         <>
             <Head title="在庫食材" />
-            <MainLayout>
+            <MainLayout auth={auth}>
                 <main className="relative flex flex-col items-center  pt-[5em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto h-full ">
                     <Link href={route("StockInfo")}>
                         <table className=" shadow-[1px_0px_2px_1px_gray] w-[50vw] max-w-[500px] rounded-[20px] mt-[20px]" >

@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // 建立 personal_access_tokens 資料表
         Schema::create('personal_access_tokens', function (Blueprint $table) {
             $table->id();
-            $table->morphs('tokenable');
+            $table->morphs('tokenable'); // 多態關聯欄位
             $table->string('name');
             $table->string('token', 64)->unique();
             $table->text('abilities')->nullable();
