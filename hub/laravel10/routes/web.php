@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\InquiryController;
 
 
 /*
@@ -59,17 +60,10 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
 
-//
+// 帳號使用者資料
 Route::get('/MyStock', function () {
     return Inertia::render('Auth/MyStock');
 })->middleware(['auth', 'verified'])->name('MyStock');
-
-//
-Route::get('/News', function () {
-    return Inertia::render('Auth/News');
-})->name('News');
-
-
 
 Route::get('/MyStock/StockInfo', function () {
     return Inertia::render('Auth/StockInfo');
@@ -85,6 +79,14 @@ Route::get('/MyStock/CostsHistory', function () {
     return Inertia::render('Auth/CostsHistory');
 })->name('CostsHistory');
 
-Route::get('/QandA', function () {
-    return Inertia::render('Auth/QandA');
-})->name('QandA');
+// 最新消息
+Route::get('/News', function () {
+    return Inertia::render('Auth/News');
+})->name('News');
+
+// 質問
+Route::get('/QandA', [InquiryController::class, 'index'])->name('QandA');
+
+// 設計者通道
+Route::get('/QandAForm', [InquiryController::class, 'index'])->name('QandAForm');
+Route::post('/inquiry/store', [InquiryController::class, 'store'])->name('inquiry.store');

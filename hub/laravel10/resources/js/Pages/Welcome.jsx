@@ -41,7 +41,7 @@ export default function Welcome(auth) {
                         </div>
 
                         <div className='absolute flex items-center justify-center md:w-[19vw] md:h-[19vw] w-[25vw] h-[25vw] bg-[rgba(1,2,32,0.59)] text-white text-[6vw] sm:text-[3vw] top-0 right-[26vw]  md:right-[19.1vw]'>
-                            <p>当月支払</p>
+                            <p><Link href={route('QandAForm')}>当月支払</Link></p>
                         </div>
                     </div>
 
