@@ -18,7 +18,9 @@ export default function Header({auth}) {
         <>
             {/* Header */}
             <header className="fixed top-0 left-0 w-screen bg-yellow-100 shadow p-4 flex justify-between items-center z-50">
-                <h1 className="text-xl font-bold text-gray-800"><Link href={route('Welcome')}>My App</Link></h1>
+                {
+                    auth.user ? <h1 className="text-xl font-bold text-gray-800"><Link href={route('MyStock')}>My App</Link></h1> : <h1 className="text-xl font-bold text-gray-800"><Link href={route('Welcome')}>My App</Link></h1>
+                }
                 <nav className="space-x-4 text-sm font-medium flex items-center px-[15px]">
                     <a href={route('QandA')} className="text-gray-700 hover:text-gray-900 flex flex-col items-center"><img src={QA} alt="" />Q&A</a>
                     {

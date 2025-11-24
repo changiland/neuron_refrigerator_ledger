@@ -2,8 +2,8 @@ import { Link, Head } from '@inertiajs/react';
 import MainLayout from '@/Layouts/MainLayout';
 import IntroPhoto from '@/Images/IntrodutionPhoto.jpg';
 import funcPhoto from '@/Images/functionphoto.webp';
-import News from '@/Components/NewsComp';
-export default function Welcome(auth) {
+import NewsComp from '@/Components/NewsComp';
+export default function Welcome({auth, news}) {
     return (
         <>
             <Head title="ホームページ" />
@@ -41,7 +41,7 @@ export default function Welcome(auth) {
                         </div>
 
                         <div className='absolute flex items-center justify-center md:w-[19vw] md:h-[19vw] w-[25vw] h-[25vw] bg-[rgba(1,2,32,0.59)] text-white text-[6vw] sm:text-[3vw] top-0 right-[26vw]  md:right-[19.1vw]'>
-                            <p><Link href={route('QandAForm')}>当月支払</Link></p>
+                            <p>当月支払</p>
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@ export default function Welcome(auth) {
                         <button className='shadow-xl w-[80%] h-full bg-white rounded-[20px] text-[7vw] sm:text-[5vw]'><Link href={route('QandA')}>問い合わせ</Link></button>
                     </div>
 
-                    <News/>
+                    <NewsComp news={news}/>
                 </main>
             </MainLayout>
         </>

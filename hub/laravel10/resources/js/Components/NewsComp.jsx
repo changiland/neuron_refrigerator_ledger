@@ -1,8 +1,11 @@
 import { Link } from '@inertiajs/react';
+import NewsView from './NewsView';
 
 
 
-export default function News() {
+export default function NewsComp({news}) {
+
+    //console.log(news);
     return (
         <div>
             <table className=' table-fixed shadow-xl w-[90vw] sm:w-[80vw] sm:max-w-[1000px] rounded-[15px] bg-gray-100 '>
@@ -15,11 +18,7 @@ export default function News() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr className="p-[100px] border-b-[1px] divide-x-[1px] divide-white border-white ">
-                        <td className="flex justify-center">2025/10/10</td>
-                        <td className="pl-[10px]">Laravel1</td>
-                        <td className="flex justify-center">Laravel2</td>
-                    </tr>
+                    <NewsView news={news}/>
                 </tbody>
                 <tfoot>
                     <tr>

@@ -1,10 +1,10 @@
 import { Link, Head } from "@inertiajs/react";
 import MainLayout from "@/Layouts/MainLayout";
-import News from "@/Components/NewsComp";
+import NewsComp from "@/Components/NewsComp";
 
 
 
-export default function MyStock({ auth }) {
+export default function MyStock({ auth, news }) {
     return (
         <>
             <Head title="在庫食材" />
@@ -35,7 +35,7 @@ export default function MyStock({ auth }) {
                             <Link href={route('ArrivalHistory')}><p className="flex justify-center">当月支払</p></Link>
                         </div>
                     </div>
-                    <News />
+                    <NewsComp news={news}/>
                 </main>
             </MainLayout>
         </>

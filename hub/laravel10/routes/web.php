@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\InquiryController;
+use App\Http\Controllers\NewsController;
 
 
 /*
@@ -23,9 +24,7 @@ use App\Http\Controllers\InquiryController;
 */
 // Welcome Page
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-})->name('Welcome');
+Route::get('/', [NewsController::class, 'index'])->name('Welcome');
 
 // 註冊 Page
 Route::get('/Register', function () {
@@ -61,9 +60,7 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
 // 帳號使用者資料
-Route::get('/MyStock', function () {
-    return Inertia::render('Auth/MyStock');
-})->middleware(['auth', 'verified'])->name('MyStock');
+Route::get('/MyStock', [NewsController::class, 'index'])->middleware(['auth', 'verified'])->name('MyStock');
 
 Route::get('/MyStock/StockInfo', function () {
     return Inertia::render('Auth/StockInfo');
@@ -80,13 +77,17 @@ Route::get('/MyStock/CostsHistory', function () {
 })->name('CostsHistory');
 
 // 最新消息
-Route::get('/News', function () {
-    return Inertia::render('Auth/News');
-})->name('News');
+Route::get('/News', [NewsController::class, 'index'])->name('News');
 
 // 質問
 Route::get('/QandA', [InquiryController::class, 'index'])->name('QandA');
 
 // 設計者通道
-Route::get('/QandAForm', [InquiryController::class, 'index'])->name('QandAForm');
+Route::get('/AdminPage', function () {
+    return Inertia::render('Auth/AdminPage');
+})->name('AdminPage');
+Route::get('/AdminPage/QandAForm', [InquiryController::class, 'index'])->name('QandAForm');
 Route::post('/inquiry/store', [InquiryController::class, 'store'])->name('inquiry.store');
+Route::get('/AdminPage/NewsForm', [NewsController::class, 'index'])->name('NewsForm');
+Route::post('/news/store', [NewsController::class, 'store'])->name('news.store');
+
