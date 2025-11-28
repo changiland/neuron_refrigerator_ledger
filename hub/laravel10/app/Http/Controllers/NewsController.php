@@ -24,7 +24,10 @@ class NewsController extends Controller
         // 使用 create() 新增資料，sort_order 會自動遞增
         News::create($request->only('types_id', 'published_at', 'title', 'comment'));
 
-        return redirect()->back()->with('success', '新增成功');
+        return redirect()->back()->with('success', '新增成功'); // redirect()->back()
+                                                               // 將使用者重新導回 上一頁（就是發送表單的那個頁面）。
+                                                               // ->with('success', '新增成功')
+                                                               // 帶一個「臨時訊息」給下一個請求（flash message）。
     }
 
     public function index(Request $request)
@@ -32,8 +35,8 @@ class NewsController extends Controller
         // 在 DB 層做 join 排序，並取出 Eloquent 物件
         $news = News::join('news_type', 'news.types_id', '=', 'news_type.id')
         ->select('news.*', 'news_type.type_name')
-        ->orderBy('news_type.id')
-        ->orderBy('news.sort_order')
+        ->orderBy('news_type.id') // 新聞類別（news_type）的 id 來排序
+        ->orderBy('news.sort_order') // 在 同一個類別內，按照 news.sort_order 排序。
         ->get();
         //->paginate(20); // 資料過大分頁
 
@@ -82,5 +85,17 @@ class NewsController extends Controller
             ]);
         }
 
+    }
+
+    public function show($title)
+    {
+        $news = News::join('news_type', 'news.types_id', '=', 'news_type.id') // 把兩個資料表連結起來
+        ->select('news.*', 'news_type.type_name as type_name') // 選擇要取回哪些欄位
+        ->where('news.title', $title) // 用 title 當搜尋條件
+        ->firstOrFail(); // 取出第一筆資料
+
+        return Inertia::render('Auth/NewsDetail', [
+            'news' => $news
+        ]);
     }
 }

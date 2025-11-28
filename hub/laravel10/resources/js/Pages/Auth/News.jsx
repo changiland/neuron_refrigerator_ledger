@@ -7,12 +7,13 @@ import NewsView from '@/Components/NewsView';
 
 
 export default function News({auth, news}) {
-    
+
     return (
         <>
             <Head title="お知らせ" />
             <MainLayout auth={auth}>
-                <main className="flex flex-col items-center justify-center pt-[5em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto ">
+                <main className="flex flex-col items-center  pt-[5em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto ">
+                    <h2 className="text-2xl font-bold mb-4">最新情報</h2>
                     <div>
                         <table className=' table-fixed shadow-xl w-[90vw] sm:w-[80vw] sm:max-w-[1000px] rounded-[15px] bg-gray-100 '>
                             <caption className='bg-blue-100 border-b-[1px] border-white rounded-t-[15px]'>最新情報</caption>

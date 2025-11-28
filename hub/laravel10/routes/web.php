@@ -27,7 +27,7 @@ use App\Http\Controllers\NewsController;
 Route::get('/', [NewsController::class, 'index'])->name('Welcome');
 
 // 註冊 Page
-Route::get('/Register', function () {
+Route::get('/登録', function () {
     return Inertia::render('Auth/Register');
 })->name('Register');
 
@@ -45,7 +45,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 // 登入 Page
-Route::get('/Login', function () {
+Route::get('/ログイン', function () {
     return Inertia::render('Auth/Login');
 })->name('Login');
 
@@ -55,32 +55,33 @@ Route::get('/login', function () {
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+Route::post('/ログアウト', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
 
 // 帳號使用者資料
-Route::get('/MyStock', [NewsController::class, 'index'])->middleware(['auth', 'verified'])->name('MyStock');
+Route::get('/在庫状況', [NewsController::class, 'index'])->middleware(['auth', 'verified'])->name('MyStock');
 
-Route::get('/MyStock/StockInfo', function () {
+Route::get('/在庫状況/在庫情報', function () {
     return Inertia::render('Auth/StockInfo');
 })->name('StockInfo');
 
-Route::get('/MyStock/ArrivalHistory', function () {
+Route::get('/在庫状況/入荷履歴', function () {
     return Inertia::render('Auth/ArrivalHistory');
 })->name('ArrivalHistory');
 
-Route::get('/MyStock/ArrivalHistory/ArrivalDetail', [EventController::class, 'index'])->name('ArrivalDetail');
+Route::get('/在庫状況/入荷履歴/入荷詳細', [EventController::class, 'index'])->name('ArrivalDetail');
 
-Route::get('/MyStock/CostsHistory', function () {
+Route::get('/在庫状況/消費履歴', function () {
     return Inertia::render('Auth/CostsHistory');
 })->name('CostsHistory');
 
 // 最新消息
-Route::get('/News', [NewsController::class, 'index'])->name('News');
+Route::get('/ニュース', [NewsController::class, 'index'])->name('News');
+Route::get('/ニュース/{title}', [NewsController::class, 'show'])->name('NewsDetail');
 
 // 質問
-Route::get('/QandA', [InquiryController::class, 'index'])->name('QandA');
+Route::get('/お問い合わせ', [InquiryController::class, 'index'])->name('QandA');
 
 // 設計者通道
 Route::get('/AdminPage', function () {

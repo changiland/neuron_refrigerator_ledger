@@ -32,7 +32,7 @@ export default function MyStock({ auth, news }) {
                             <Link href={route('ArrivalHistory')}><p className="flex justify-center">入荷履歴</p></Link>
                         </div>
                         <div className="rounded-[15px] border-2 border-red-500 w-[100px]">
-                            <Link href={route('ArrivalHistory')}><p className="flex justify-center">当月支払</p></Link>
+                            <Link href={route('CostsHistory')}><p className="flex justify-center">当月支払</p></Link>
                         </div>
                     </div>
                     <NewsComp news={news}/>
