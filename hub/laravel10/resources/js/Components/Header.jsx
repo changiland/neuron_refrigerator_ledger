@@ -10,7 +10,7 @@ export default function Header({auth}) {
 
     const handleLogout = (e) => {
         e.preventDefault();
-        router.post('/logout'); // 送 POST /logout 到 Laravel
+        router.post('/ログアウト'); // 送 POST /logout 到 Laravel
     }
 
 
