@@ -1,10 +1,11 @@
+import StockView from "@/Components/StockView";
 import MainLayout from "@/Layouts/MainLayout";
 import { Link, Head } from "@inertiajs/react";
 
 
 
 
-export default function StockInfo({ auth }) {
+export default function StockInfo({ auth, inventory }) {
     return (
         <>
             <Head title="詳細情報" />
@@ -13,21 +14,16 @@ export default function StockInfo({ auth }) {
                     <div>
                         <table className=" shadow-[1px_0px_2px_1px_gray] w-[50vw] max-w-[500px] rounded-[20px] mt-[20px]" >
                             <caption >詳細情報</caption>
-                            <thead >
-                                <tr className=" h-[100px]">
-                                    <th >項目</th>
-                                    <th >食分</th>
-                                </tr>
-                            </thead>
-                            <tbody >
-                                <tr className=" h-[50px]">
-                                    <td ><p className="flex justify-center">2025/10/10</p></td>
-                                    <td ><p className="flex justify-center">Laravel1</p></td>
-                                </tr>
-                            </tbody>
+                            <StockView inventory={inventory} />
                             <tfoot >
+                                {/* <tr className=" h-[50px]">
+                                    <td colSpan="2" ><p className="flex justify-center">合計{inventory.reduce((total, item) => total + (item.quantity || 0), 0)}</p></td>
+                                </tr>
+                                inventory.reduce(...)：遍歷陣列，把每個元素累加到 total 上。
+                                (item.quantity || 0)：如果 item.quantity 是 null、undefined 或 0，就用 0。
+                                0（最後一個參數）：total 的初始值.*/}
                                 <tr className=" h-[50px]">
-                                    <td colSpan="2" ><p className="flex justify-center">合計</p></td>
+                                    <td colSpan="2" ><p className="flex justify-center">合計 {inventory.length} つデータ</p></td>
                                 </tr>
                             </tfoot>
                         </table>

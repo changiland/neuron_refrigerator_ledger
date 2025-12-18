@@ -12,6 +12,9 @@ export default function AdminPage() {
             <div>
                 <Link href={route('NewsForm')}><p className="cursor-pointer">NewsForm</p></Link>
             </div>
+            <div>
+                <Link href={route('AdminProduct')}><p className="cursor-pointer">AdminProduct</p></Link>
+            </div>
         </>
     )
 }

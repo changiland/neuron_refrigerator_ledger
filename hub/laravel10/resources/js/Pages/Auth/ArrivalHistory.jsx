@@ -1,11 +1,12 @@
 import { Link, Head } from "@inertiajs/react";
 import MainLayout from "@/Layouts/MainLayout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import { router } from "@inertiajs/react";
 
 
 
-export default function ArrivalHistory({ auth }) {
+export default function ArrivalHistory({ auth, arrivalMonthly }) {
 
     const [currentDate, setCurrentDate] = useState(dayjs());
     const [event, setEvent] = useState([]);
@@ -35,6 +36,69 @@ export default function ArrivalHistory({ auth }) {
         setCurrentDate(currentDate.add(1, "month"));
     };
 
+
+
+    useEffect(() => {
+
+        router.get(
+            route('ArrivalHistory', { month: currentDate.format("YYYY-MM") }),
+            {},
+            {
+                preserveState: true,
+                replace: true,
+                onSuccess: (page) => {
+                   setEvent(page.props.arrivalMonthly || []);
+
+                },
+            }
+        );
+    }, [currentDate.format("YYYY-MM")]);
+    console.log(arrivalMonthly);
+
+    const getEventCountByDay = (day) => {
+        if (!day) return 0;
+
+        const dateStr = currentDate
+            .date(day)
+            .format("YYYY-MM-DD");
+        console.log(dateStr);
+        return event.filter(e =>
+            dayjs(e.created_at).format("YYYY-MM-DD") === dateStr
+        ).length;
+    };
+    /*useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const response = await fetch(
+                    route('ArrivalHistory', { month: newMonth })
+                );
+                if (response.ok) {
+                    const data = await response.json();
+                    setEvent(data.events);
+                } else {
+                    console.error("Failed to fetch events");
+                }
+            } catch (error) {
+                console.error("Error fetching events:", error);
+            }
+        };
+
+        fetchEvents();
+    }, [newMonth]);
+    map 是「一對一」
+    filter 是「留下或丟掉」
+    reduce 是「重新組裝整個世界」 */
+
+    /*const dateValue = event.reduce((acc, item) => {
+        const date = dayjs(item.created_at).format("YYYY-MM-DD");
+
+        acc[date] ??= [];
+        acc[date].push(item);
+        return acc;
+    }, {})
+
+    console.log(dateValue);*/
+
     return (
         <>
             <Head title="入荷履歴" />
@@ -54,19 +118,18 @@ export default function ArrivalHistory({ auth }) {
                                 </span>
                             ))}
                         </div>
-
                         {weeks.map((week) => (
                             <div key={week} className="mb-2 w-full flex justify-start justify-around">
                                 {week.map((day, idx) => (
-                                    <Link href={route('ArrivalDetail', { date: day }) } key={idx} className="inline-block w-[60px] h-[100px] text-center align-top leading-[50px] border border-gray-300 rounded-lg m-[1px] cursor-pointer">
+                                    <Link href={route('ArrivalDetail', { date: currentDate.date(day).format("YYYY-MM-DD") }) } key={idx} className="inline-block w-[60px] h-[100px] text-center align-top leading-[50px] border border-gray-300 rounded-lg m-[1px] cursor-pointer">
                                         {day ? day : ""}
-                                        {event.length ? (
+                                        {getEventCountByDay(day) > 0 && (
                                             <div className="mt-2">
                                                 <span className="inline-block bg-blue-500 text-white text-xs px-1 rounded">
-                                                     {event.length} 件のイベント
+                                                    {getEventCountByDay(day)} 件のイベント
                                                 </span>
                                             </div>
-                                        ) : null  }
+                                        )}
                                     </Link>
                                 ))}
                             </div>

@@ -13,7 +13,7 @@ export default function QandAForm({ news_type }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // 發送 POST 請求到 /inquiry/store
+        // 發送 POST 請求到 /news/store
         Inertia.post('/news/store', {
             types_id,
             published_at,

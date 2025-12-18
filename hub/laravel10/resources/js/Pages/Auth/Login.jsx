@@ -21,9 +21,9 @@ export default function Login({auth}) {
     const { post, processing } = userFrom;
 
     const submit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); // デフォルトのフォーム送信を防止
 
-        post(route('login'));
+        post(route('login')); // 'login' ルートにフォームデータを送信
     };
 
     return (

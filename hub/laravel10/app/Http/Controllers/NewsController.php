@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\categories;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\News;
 use App\Models\News_type;
 use SebastianBergmann\Environment\Console;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Products;
 
 class NewsController extends Controller
 {
@@ -61,6 +64,46 @@ class NewsController extends Controller
         //dump($top3);
         //dd($top3);
 
+        $id = Auth::id();
+        /* $product = Products::query()
+            ->with('category')
+            ->whereIn('user_id', [$id])
+            ->orWhereNull('user_id')
+            ->get();
+
+        $categories = Products::with('category')
+            ->where(function ($q) use ($id) {
+                $q->where('user_id', $id)
+                ->orWhereNull('user_id');
+            })
+            ->get();*/
+        $categories = categories::with(['products' => function ($q) use ($id) { // 先篩選 products
+            $q->where(function ($qq) use ($id) { // 篩選有包含該使用者產品或沒有產品
+                $qq->where('user_id', $id)
+                ->orWhereNull('user_id');
+            });
+        }])
+        ->where(function ($q) use ($id) { // 篩選有包含該使用者產品或沒有產品的分類
+            $q->whereHas('products', function ($qq) use ($id) { // 篩選有包含該使用者產品或沒有產品
+                $qq->where('user_id', $id)
+                ->orWhereNull('user_id');
+            })
+            ->orDoesntHave('products');
+        })
+        ->get();
+        /*$categories = categories::leftJoin('products', function ($join) use ($id) {
+                $join->on('categories.id', '=', 'products.category_id')
+                    ->where(function ($q) use ($id) {
+                        $q->where('products.user_id', $id)
+                        ->orWhereNull('products.user_id');
+                    });
+            })
+            ->select('categories.*')
+            ->distinct()
+            ->orderBy('categories.category_name')
+            ->get();*/
+
+        // dd($categories);
         // 撈單一TABLE全部資料
         $news_type = News_type::orderBy('type_name')->get();
          if ($request->routeIs('NewsForm')) {
@@ -81,7 +124,8 @@ class NewsController extends Controller
         }
         if ($request->routeIs('MyStock')) {
             return Inertia::render('Auth/MyStock', [
-                'news' => $top5
+                'news' => $top5,
+                'categories' => $categories
             ]);
         }
 

@@ -14,7 +14,7 @@ class News extends Model
 
      public function type()
     {
-        return $this->belongsTo(News_type::class, 'types_id');
+        return $this->belongsTo(News_type::class, 'types_id'); // 假設 News_type 是你的類型模型
     }
 
     // 自動遞增 sort_order（每個 type 獨立）

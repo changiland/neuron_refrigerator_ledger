@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArrivalInventory;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EventController;
 use Illuminate\Foundation\Application;
@@ -9,6 +10,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\InquiryController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\InventoryMonthly;
 use App\Http\Controllers\NewsController;
 
 
@@ -62,19 +65,13 @@ Route::post('/ログアウト', [AuthenticatedSessionController::class, 'destroy
 // 帳號使用者資料
 Route::get('/在庫状況', [NewsController::class, 'index'])->middleware(['auth', 'verified'])->name('MyStock');
 
-Route::get('/在庫状況/在庫情報', function () {
-    return Inertia::render('Auth/StockInfo');
-})->name('StockInfo');
+Route::get('/在庫状況/在庫情報', [InventoryController::class, 'show'])->name('StockInfo');
 
-Route::get('/在庫状況/入荷履歴', function () {
-    return Inertia::render('Auth/ArrivalHistory');
-})->name('ArrivalHistory');
+Route::get('/在庫状況/入荷履歴', [ArrivalInventory::class, 'index'])->name('ArrivalHistory');
 
-Route::get('/在庫状況/入荷履歴/入荷詳細', [EventController::class, 'index'])->name('ArrivalDetail');
+Route::get('/在庫状況/入荷履歴/入荷詳細', [ArrivalInventory::class, 'show'])->name('ArrivalDetail');
 
-Route::get('/在庫状況/消費履歴', function () {
-    return Inertia::render('Auth/CostsHistory');
-})->name('CostsHistory');
+Route::get('/在庫状況/消費履歴', [InventoryMonthly::class, 'index'])->name('CostsHistory');
 
 // 最新消息
 Route::get('/ニュース', [NewsController::class, 'index'])->name('News');
@@ -91,4 +88,5 @@ Route::get('/AdminPage/QandAForm', [InquiryController::class, 'index'])->name('Q
 Route::post('/inquiry/store', [InquiryController::class, 'store'])->name('inquiry.store');
 Route::get('/AdminPage/NewsForm', [NewsController::class, 'index'])->name('NewsForm');
 Route::post('/news/store', [NewsController::class, 'store'])->name('news.store');
-
+Route::get('/AdminPage/AdminProduct', [InventoryController::class, 'index'])->name('AdminProduct');
+Route::post('/products/store', [InventoryController::class, 'store'])->name('products.store');

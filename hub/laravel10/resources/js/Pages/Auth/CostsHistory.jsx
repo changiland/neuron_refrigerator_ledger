@@ -2,10 +2,13 @@ import { Link, Head } from "@inertiajs/react";
 import MainLayout from "@/Layouts/MainLayout";
 import { useState } from "react";
 import dayjs from "dayjs";
+import { router } from "@inertiajs/react";
+import { useMemo } from "react";
+import { set } from "zod";
 
 
 
-export default function ArrivalHistory({ auth }) {
+export default function ArrivalHistory({ auth, monthly, transaction }) {
 
     const [currentMonth, setCurrentMonth] = useState(dayjs());
     const [selectedMonth, setSelectedMonth] = useState("");
@@ -18,7 +21,6 @@ export default function ArrivalHistory({ auth }) {
     const thisMonth = currentMonth.month() + 1; // 現在の月までの月数を取得
     const thisYear = currentMonth.year();
     const currentYear = dayjs().year(); // 現在の年を取得
-    let newMonth;
 
     maxMonth =  thisYear === currentYear ? thisMonth : 12 ; // その年の最大月数を決定
 
@@ -42,10 +44,50 @@ export default function ArrivalHistory({ auth }) {
     };
 
     const handleChange = (e) => {
-        newMonth = setSelectedMonth(e.target.value); // 選択された月に更新
+        const selected = e.target.value;
+        setSelectedMonth(selected); // 選択された月を状態に保存
+
+        const newMonth = selected
+            .replace("年", "-")
+            .replace("月", ""); // フォーマットを "YYYY-MM" に変換
+
         console.log(newMonth);
+
+        router.get(
+            route('CostsHistory'),
+            {
+                month: newMonth,
+            },
+            // preserveState / replace 技術的preserveState(保留畫面狀態)replace(不新增瀏覽器歷史)只發生在「畫面切換 / 篩選」時
+            {
+                preserveState: true, // ページ遷移時に状態を保持
+                replace: true, // ブラウザの履歴を置き換える
+            }
+        );
     };
 
+    const totalCost = useMemo(() => {
+        return transaction.reduce(
+            (sum, item) => sum + Number(item.cost || 0),
+            0
+        );
+        }, [transaction]);
+
+    const totalByProduct = useMemo(() => {
+            return transaction.reduce((acc, item) => {
+                const product = item.products?.name ?? "未分類";
+                acc[product] = acc[product] || {
+                    total: 0,
+                    items: []
+                };
+                acc[product].total += Number(item.cost || 0);
+                acc[product].items.push(item);
+                return acc;
+            }, {});
+            }, [transaction]);
+
+    console.log(monthly);
+    console.log(transaction);
 
     return (
         <>
@@ -73,7 +115,32 @@ export default function ArrivalHistory({ auth }) {
                             <div className="mt-4 w-full max-w-[500px] flex flex-col mx-auto ">
                                 <div className="flex justify-center">{selectedMonth}</div>
                                 <section className="mt-2 w-full max-w-[1000px] flex flex-col items-center">
-                                    {costList.map((item, index) => (
+                                    {Object.entries(totalByProduct).length === 0 ? (
+                                        <p className="text-center">当月の支払記錄はありません。</p>
+                                    ) : (
+                                        Object.entries(totalByProduct).map(([product, data]) => (
+                                            < label className="w-full cursor-pointer" key={product} >
+                                                <input type="checkbox" className="peer hidden" />
+                                                <div className="flex justify-between w-full border m-[5px] px-[5px] rounded-lg" >
+                                                    <span className="min-w-[150px]">{product}:</span>
+                                                    <span>{data.total}円
+                                                    </span>
+                                                </div>
+                                                {data.items.map(item => (
+                                                <div className="hidden peer-checked:block w-full border m-[5px] rounded-lg pb-[10px]">
+
+                                                    <p className="flex justify-between w-[90%] mx-auto mt-[5px]" key={item.id}>
+                                                        <span>{dayjs(item.created_at).format('YYYY年MM月DD日')}</span>
+                                                        <span>{item.products.name}</span>
+                                                        <span>{item.cost}円</span>
+                                                    </p>
+
+                                                </div>
+                                                )) }
+                                            </label>
+                                        ))
+                                    )}
+                                    {/*costList.map((item, index) => (
                                         < label className="w-full cursor-pointer" key={index} >
                                             <input type="checkbox" className="peer hidden" />
                                             <div className="flex justify-between w-full border m-[5px] px-[5px] rounded-lg">
@@ -87,16 +154,12 @@ export default function ArrivalHistory({ auth }) {
                                             </div>
                                         </label>
 
-                                    ))}
+                                    ))*/}
                                 </section>
                                 <div className="flex justify-end">
                                     <span className="font-bold">合計:</span>
                                     <span className="font-bold ml-[5px]">
-                                        {(() => {
-                                            let sum = 0;
-                                            costList.forEach(item => sum += item.cost);
-                                            return sum;
-                                        })()}円
+                                        {totalCost.toLocaleString()}円
                                     </span> { /* 即時計算合計金額 */ }
                                 </div>
                             </div>
