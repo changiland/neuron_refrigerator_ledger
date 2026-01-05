@@ -31,7 +31,7 @@ export default function Header({auth}) {
                 }
                 <nav className="space-x-4 text-sm font-medium flex items-center px-[15px]">
                     {
-                        auth.user ? <a href={route('QandA')} className="text-white hover:text-gray-300 flex flex-col items-center"><img src={QA2} alt="" />Q&A</a> : <a href={route('Welcome')} className="text-gray-700 hover:text-gray-900 flex flex-col items-center"><img src={QA} alt="" />Q&A</a>
+                        auth.user ? <a href={route('QandA')} className="text-white hover:text-gray-300 flex flex-col items-center"><img src={QA2} alt="" />Q&A</a> : <a href={route('QandA')} className="text-gray-700 hover:text-gray-900 flex flex-col items-center"><img src={QA} alt="" />Q&A</a>
                     }
 
                     {
