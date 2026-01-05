@@ -101,12 +101,12 @@ export default function UserInfo({ auth, user }) {
                                         />
                                         <button type="submit" className="h-[2rem] bg-blue-300 border rounded-[15px] w-[70%] mx-[15%]" disabled={processing}>{processing ? '送信中' : '送信する'}</button>
                                     </form>
-
                                 </Popup>
-                                            </div>
-
+                        </div>
                     </div>
-
+                    <div className="flex justify-center mt-[20px] space-x-6">
+                        <Link href={route('MyStock')}><p className="rounded-[25px] border-4 border-blue-500 bg-blue-200 w-[9rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">情報ページ</p></Link>
+                    </div>
                 </main>
 
             </MainLayout>
