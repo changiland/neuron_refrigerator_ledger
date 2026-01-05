@@ -8,7 +8,7 @@ export default function NewsComp({news}) {
     //console.log(news);
     return (
         <div>
-            <table className=' table-fixed shadow-xl w-[90vw] sm:w-[80vw] sm:max-w-[1000px] rounded-[15px] bg-gray-100 '>
+            <table className=' table-fixed shadow-xl w-[90vw] sm:w-[80vw] sm:max-w-[1000px] rounded-b-[15px] bg-gray-100 '>
                 <caption className='bg-blue-100 border-b-[1px] border-white rounded-t-[15px]'>最新情報</caption>
                 <thead>
                     <tr className='p-[100px] border-b-[1px] divide-x-[1px] divide-white border-white '>

@@ -9,11 +9,14 @@ use Inertia\Inertia;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InventoryMonthly;
 use App\Http\Controllers\NewsController;
-
+use App\Http\Controllers\UserInfomatiom;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +66,23 @@ Route::post('/ログアウト', [AuthenticatedSessionController::class, 'destroy
     ->name('logout');
 
 // 帳號使用者資料
+
 Route::get('/在庫状況', [NewsController::class, 'index'])->middleware(['auth', 'verified'])->name('MyStock');
+
+Route::get('/user-info', [UserInfomatiom::class, 'index'])->name('userInfo');
+
+Route::post('/userinfo/store', [UserInfomatiom::class, 'store'])->name('userinfo.store');
+
+Route::put('/user/password', [PasswordController::class, 'update'])
+        ->name('password.update');
+
+Route::post('/user/store', [PasswordResetLinkController::class, 'store'])->name('user.store');
+
+Route::get('/password/reset/{token}', [NewPasswordController::class, 'create'])
+    ->name('password.reset');
+
+Route::post('/password/reset', [NewPasswordController::class, 'store'])
+    ->name('password.update');
 
 Route::get('/在庫状況/在庫情報', [InventoryController::class, 'show'])->name('StockInfo');
 
@@ -90,3 +109,4 @@ Route::get('/AdminPage/NewsForm', [NewsController::class, 'index'])->name('NewsF
 Route::post('/news/store', [NewsController::class, 'store'])->name('news.store');
 Route::get('/AdminPage/AdminProduct', [InventoryController::class, 'index'])->name('AdminProduct');
 Route::post('/products/store', [InventoryController::class, 'store'])->name('products.store');
+Route::post('/products/updata', [InventoryController::class, 'updata'])->name('products.updata');

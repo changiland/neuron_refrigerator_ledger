@@ -116,18 +116,18 @@ export default function ArrivalHistory({ auth, monthly, transaction }) {
                                 <div className="flex justify-center">{selectedMonth}</div>
                                 <section className="mt-2 w-full max-w-[1000px] flex flex-col items-center">
                                     {Object.entries(totalByProduct).length === 0 ? (
-                                        <p className="text-center">当月の支払記錄はありません。</p>
+                                        <p className="text-center font-bold">当月の支払記錄はありません。</p>
                                     ) : (
                                         Object.entries(totalByProduct).map(([product, data]) => (
                                             < label className="w-full cursor-pointer" key={product} >
                                                 <input type="checkbox" className="peer hidden" />
-                                                <div className="flex justify-between w-full border m-[5px] px-[5px] rounded-lg" >
+                                                <div className="flex justify-between w-full border-4 m-[5px] px-[5px] rounded-lg border-blue-500 hover:bg-blue-200 peer-checked:bg-blue-500 peer-checked:text-white" >
                                                     <span className="min-w-[150px]">{product}:</span>
                                                     <span>{data.total}円
                                                     </span>
                                                 </div>
                                                 {data.items.map(item => (
-                                                <div className="hidden peer-checked:block w-full border m-[5px] rounded-lg pb-[10px]">
+                                                <div className="hidden peer-checked:block w-full border-2 m-[5px] rounded-lg mb-[10px] border-blue-300" key={item.id}>
 
                                                     <p className="flex justify-between w-[90%] mx-auto mt-[5px]" key={item.id}>
                                                         <span>{dayjs(item.created_at).format('YYYY年MM月DD日')}</span>
@@ -168,14 +168,16 @@ export default function ArrivalHistory({ auth, monthly, transaction }) {
 
                     </div>
 
-                    <div className="h-[200px] w-[50vw] max-w-[500px] flex justify-around items-center mt-[20px]">
-                        <div className="rounded-[15px] border-2 border-red-500 w-[100px]">
-                            <Link href={route('StockInfo')}><p className="flex justify-center">詳細情報</p></Link>
+                    <div className="h-[200px] w-[50vw] max-w-[500px] flex justify-center items-center mt-[20px]">
+                        <div className="mr-[1rem]">
+                            <Link href={route('StockInfo')}><p className="rounded-[25px] border-4 border-blue-500 bg-blue-200 w-[9rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">詳細情報</p></Link>
                         </div>
-                        <div className="rounded-[15px] border-2 border-red-500 w-[100px]">
-                            <Link href={route('ArrivalHistory')}><p className="flex justify-center">入荷履歴</p></Link>
+                        <div className="mr-[1rem]">
+                            <Link href={route('ArrivalHistory')}><p className="rounded-[25px] border-4 border-blue-500 bg-blue-200 w-[9rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">入荷履歴</p></Link>
                         </div>
-
+                        <div>
+                            <Link href={route('MyStock')}><p className="rounded-[25px] border-4 border-blue-500 bg-blue-200 w-[9rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">情報ページ</p></Link>
+                        </div>
                     </div>
                 </main>
             </MainLayout>

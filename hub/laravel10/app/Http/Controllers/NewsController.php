@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\categories;
+use App\Models\InventoryStock;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\News;
@@ -102,6 +103,25 @@ class NewsController extends Controller
             ->distinct()
             ->orderBy('categories.category_name')
             ->get();*/
+        $stocks = InventoryStock::with([
+            'product' => function ($q) use ($id) {
+                $q->where(function ($qq) use ($id) {
+                    $qq->where('user_id', $id)
+                    ->orWhereNull('user_id');
+                })
+                ->with([
+                    'category' => function ($qc) use ($id) {
+                        $qc->where(function ($qcc) use ($id) {
+                            $qcc->where('user_id', $id)
+                                ->orWhereNull('user_id');
+                        });
+                    }
+                ]);
+            }
+        ])
+        ->where('user_id', $id)
+        ->get();
+
 
         // dd($categories);
         // 撈單一TABLE全部資料
@@ -125,7 +145,8 @@ class NewsController extends Controller
         if ($request->routeIs('MyStock')) {
             return Inertia::render('Auth/MyStock', [
                 'news' => $top5,
-                'categories' => $categories
+                'categories' => $categories,
+                'stocks' => $stocks
             ]);
         }
 

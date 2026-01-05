@@ -13,7 +13,7 @@ export default function QandA({auth, grouped}) {
             <MainLayout auth={auth}>
                 <main className="flex flex-col items-center justify-center pt-[5em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto ">
                     <div className="min-h-screen flex flex-col items-center bg-gray-100 mt-10">
-                        <h1 className="text-3xl font-bold mb-6">Q&A Page</h1>
+                        <h1 className="text-3xl font-bold mb-6">問い合わせ</h1>
                         {Object.entries(grouped).map(([key,item]) => (
 
                             <div key={key} className="mb-8">
@@ -43,8 +43,21 @@ export default function QandA({auth, grouped}) {
                                 ))}
                             </div>
                         ))}
-                        <p className="text-lg text-gray-700">This is the Q&A page content.</p>
+                        {
+                                auth.user ?
+                                <div className="mt-4 flex">
+                                    <Link href={route('MyStock')} className="rounded-[15px] border-4 border-blue-500 bg-blue-200 w-[10rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">
+                                        <p>情報ページへ</p>
+                                    </Link>
+                                </div>
+                                : <div className="mt-4">
+                                    <Link href={route('Welcome')} className="rounded-[15px] border-2 border-blue-500 bg-blue-200 w-[10rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">
+                                        <p>ホームページへ</p>
+                                    </Link>
+                                </div>
+                            }
                     </div>
+
                 </main>
 
             </MainLayout>

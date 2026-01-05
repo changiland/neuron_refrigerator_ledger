@@ -45,6 +45,25 @@ export default function NewsDetail({auth, news}){
 
 
                             </div>
+                            {
+                                auth.user ?
+                                <div className="mt-4 flex">
+                                    <Link href={route('MyStock')} className="rounded-[15px] border-4 border-blue-500 bg-blue-200 w-[10rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">
+                                        <p>情報ページへ</p>
+                                    </Link>
+                                    <Link href={route('News')} className="ml-4 rounded-[15px] border-4 border-blue-500 bg-blue-200 w-[10rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">
+                                        <p>ニュースページへ</p>
+                                    </Link>
+                                </div>
+                                : <div className="mt-4">
+                                    <Link href={route('Welcome')} className="rounded-[15px] border-2 border-blue-500 bg-blue-200 w-[10rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">
+                                        <p>ホームページへ</p>
+                                    </Link>
+                                    <Link href={route('News')} className="ml-4 rounded-[15px] border-4 border-blue-500 bg-blue-200 w-[10rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">
+                                        <p>ニュースページへ</p>
+                                    </Link>
+                                </div>
+                            }
 
                         </>
 

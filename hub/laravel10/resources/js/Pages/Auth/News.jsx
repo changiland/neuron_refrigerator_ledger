@@ -35,6 +35,19 @@ export default function News({auth, news}) {
                             </tfoot>
                         </table>
                     </div>
+                    {
+                        auth.user ?
+                        <div className="mt-4">
+                            <Link href={route('MyStock')} className="rounded-[15px] border-4 border-blue-500 bg-blue-200 w-[20rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">
+                                <p>情報ページへ</p>
+                            </Link>
+                        </div>
+                        : <div className="mt-4">
+                            <Link href={route('Welcome')} className="rounded-[15px] border-2 border-blue-500 bg-blue-200 w-[20rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">
+                                <p>ホームページへ</p>
+                            </Link>
+                        </div>
+                    }
                 </main>
             </MainLayout>
         </>

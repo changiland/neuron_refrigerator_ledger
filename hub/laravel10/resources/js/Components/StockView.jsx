@@ -8,10 +8,10 @@ export default function StockView({ inventory }) {
     //console.log(inventory);
     return (
         <>
-            <thead >
-                <tr className=" h-[100px]">
-                    <th >項目</th>
-                    <th >食分</th>
+            <thead  >
+                <tr className=" h-[100px] border-b-2 border-blue-500 h-[60px]  ">
+                    <th className="w-[50%]" >項目</th>
+                    <th className="w-[50%]" >食分</th>
                 </tr>
             </thead>
             <tbody >

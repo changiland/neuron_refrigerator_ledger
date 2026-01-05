@@ -32,6 +32,14 @@ export default function ArrivalDetail({date, arrivalDate, auth }) {
                             <div className="text-gray-500">該当データがありません</div>
                         )}
                     </div>
+                        <div className="h-[200px] w-[50vw] max-w-[500px] flex justify-center items-center mt-[20px]">
+                            <div className="mr-[1rem]">
+                                <Link href={route('ArrivalHistory')}><p className="rounded-[25px] border-4 border-blue-500 bg-blue-200 w-[9rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">入荷履歴</p></Link>
+                            </div>
+                            <div>
+                                <Link href={route('MyStock')}><p className="rounded-[25px] border-4 border-blue-500 bg-blue-200 w-[9rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">情報ページ</p></Link>
+                            </div>
+                        </div>
                 </main>
             </MainLayout>
         </>

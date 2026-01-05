@@ -156,9 +156,62 @@ class InventoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         //
+        $id = Auth::id();
+        DB::transaction(function () use ($request, $id) {
+                // 扣批次（FIFO）
+            $remaining = $request->meal;
+
+            $batches = InventoryBatches::where('user_id', $id)
+                ->where('product_id', $request->fname_id)
+                ->where('is_active', true)
+                ->orderByRaw('expiration_date IS NULL')
+                ->orderBy('expiration_date')
+                ->lockForUpdate()
+                ->get();
+
+            foreach ($batches as $batch) {
+                if ($remaining <= 0) break;
+
+                $deduct = min($batch->quantity, $remaining);
+                $batch->decrement('quantity', $deduct);
+
+                if ($batch->quantity <= 0) {
+                    $batch->update(['is_active' => false]);
+                }
+
+                $remaining -= $deduct;
+            }
+
+            if ($remaining > 0) {
+                throw new \Exception('庫存不足');
+            }
+
+            // 更新總庫存（減）
+            $stock = InventoryStock::where('user_id', $id)
+                ->where('product_id', $request->fname_id)
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            if ($stock->quantity < $request->meal) {
+                throw new \Exception('總庫存不足');
+            }
+
+            $stock->decrement('quantity', $request->meal);
+
+            inventoryTransaction::create([
+                'user_id' => $id,
+                'product_id' => $request-> fname_id,
+                'quantity' => $request-> meal,
+                'type' => 'out',
+                'portion_sizes' => $request-> meal,
+                'cost' => null,
+                'expiration_date' => null,
+            ]);
+        });
+        return redirect()->back()->with('success', '出庫成功');
     }
 
     /**

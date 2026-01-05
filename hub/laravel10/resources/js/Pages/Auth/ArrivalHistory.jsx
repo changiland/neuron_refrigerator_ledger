@@ -135,12 +135,15 @@ export default function ArrivalHistory({ auth, arrivalMonthly }) {
                             </div>
                         ))}
                     </div>
-                    <div className="h-[200px] w-[50vw] max-w-[500px] flex justify-around items-center mt-[20px]">
-                        <div className="rounded-[15px] border-2 border-red-500 w-[100px]">
-                            <Link href={route('StockInfo')}><p className="flex justify-center">詳細情報</p></Link>
+                    <div className="h-[200px] w-[50vw] max-w-[500px] flex justify-center items-center mt-[20px]">
+                        <div className="mr-[1rem]">
+                            <Link href={route('StockInfo')}><p className="rounded-[25px] border-4 border-blue-500 bg-blue-200 w-[9rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">詳細情報</p></Link>
                         </div>
-                        <div className="rounded-[15px] border-2 border-red-500 w-[100px]">
-                            <Link href={route('CostsHistory')}><p className="flex justify-center">当月支払</p></Link>
+                        <div className="mr-[1rem]">
+                            <Link href={route('CostsHistory')}><p className="rounded-[25px] border-4 border-blue-500 bg-blue-200 w-[9rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">当月支払</p></Link>
+                        </div>
+                        <div>
+                            <Link href={route('MyStock')}><p className="rounded-[25px] border-4 border-blue-500 bg-blue-200 w-[9rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">情報ページ</p></Link>
                         </div>
                     </div>
                 </main>
