@@ -10,7 +10,7 @@ export default function StockInfo({ auth, inventory }) {
         <>
             <Head title="詳細情報" />
             <MainLayout auth={auth}>
-                <main className="relative flex flex-col items-center  pt-[5em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto h-full ">
+                <main className="relative flex flex-col items-center  pt-[6em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto h-full ">
                     <div>
                         <table className=" shadow-[1px_0px_2px_1px_blue] w-[50vw] max-w-[500px] rounded-[20px] mt-[20px]" >
                             <caption >詳細情報</caption>

@@ -15,7 +15,7 @@ export default function NewsDetail({auth, news}){
         <>
             <Head title="お知らせ詳細" />
             <MainLayout auth={auth}>
-                <main className="relative flex flex-col items-center  pt-[5em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto h-full " >
+                <main className="relative flex flex-col items-center  pt-[6em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto h-full " >
                     {
                         <>
                             <h2 className="text-2xl font-bold mb-4">お知らせ詳細</h2>

@@ -39,7 +39,7 @@ export default function Transaction( { stocks } ) {
     const submit = (e) => {
         e.preventDefault(); // デフォルトのフォーム送信を防止
 
-        post(route('products.updata')); // データを送信
+        post(route('products.update')); // データを送信
 
         // フォームのリセット
         setData("day", "");

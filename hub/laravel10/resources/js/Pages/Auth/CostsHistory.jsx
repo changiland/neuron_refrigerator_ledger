@@ -93,15 +93,15 @@ export default function ArrivalHistory({ auth, monthly, transaction }) {
         <>
             <Head title="当月支払" />
             <MainLayout auth={auth}>
-                <main className="relative flex flex-col items-center  pt-[5em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto h-full ">
+                <main className="relative flex flex-col items-center  pt-[6em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto h-full ">
                     <h2 className="text-2xl font-bold mb-4">当月支払</h2>
                     <div className="w-full">
                         <div className="w-full">
                             <label htmlFor="costView"></label>
                             <div className="w-full flex items-center justify-center mb-4">
-                                <button onClick={prevPage} className="mx-[20px]">前</button>
+                                <button onClick={prevPage} className="mx-[20px] w-[2rem] h-8 hover:bg-blue-400 hover:text-white">前</button>
                                 <span className="mx-[30px] font-bold">{currentMonth.format("YYYY年")}</span>
-                                <button onClick={nextPage} className="mx-[20px]">次</button>
+                                <button onClick={nextPage} className="mx-[20px] w-[2rem] h-8 hover:bg-blue-400 hover:text-white">次</button>
                             </div>
                             <div className="flex justify-center mt-4">
                                 <select name="costView" id="costView" onChange={handleChange} value={selectedMonth}>

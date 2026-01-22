@@ -18,16 +18,29 @@ export default function MyStock({ auth, news, categories, stocks }) {
         <>
             <Head title="在庫食材" />
             <MainLayout auth={auth}>
-                <main className="relative flex flex-col items-center  pt-[5em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto h-full ">
+                <main className="relative flex flex-col items-center  pt-[6em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto h-full ">
                     <div className="h-[200px] w-[50vw] max-w-[500px] flex flex-col justify-around  items-center mt-[20px]">
-                        <div >
-                            <Link href={route('StockInfo')}><p className="rounded-[15px] bg-blue-200 w-[20rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white" >在庫状況</p></Link>
+                        <div className="relative">
+                            <Link href={route('StockInfo')} className="peer rounded-[15px] bg-blue-200 w-[20rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white" >在庫状況</Link>
+                            <div className="hidden peer-hover:block text-center text-gray-500 text-sm absolute top-[110%] left-1/2 -translate-x-1/2 w-[150px] bg-white border border-gray-300 rounded-md p-2 shadow-lg z-10">
+                                在庫状況を確認します
+
+                            </div>
+
                         </div>
-                        <div >
-                            <Link href={route('ArrivalHistory')}><p className="rounded-[15px] bg-blue-200 w-[20rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white" >入荷履歴</p></Link>
+                        <div className="relative">
+                            <Link href={route('ArrivalHistory')} className=" peer rounded-[15px] bg-blue-200 w-[20rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white">入荷履歴</Link>
+                            <div className="hidden peer-hover:block text-center text-gray-500 text-sm absolute top-[110%] left-1/2 -translate-x-1/2 w-[150px] bg-white border border-gray-300 rounded-md p-2 shadow-lg z-10">
+                                入荷履歴を確認します
+
+                            </div>
                         </div>
-                        <div >
-                            <Link href={route('CostsHistory')}><p className="rounded-[15px] bg-blue-200 w-[20rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white" >当月支払</p></Link>
+                        <div className="relative">
+                            <Link href={route('CostsHistory')} className=" peer rounded-[15px] bg-blue-200 w-[20rem] h-[3rem] flex items-center justify-center text-blue-800 font-bold hover:bg-blue-500 hover:text-white" >当月支払</Link>
+                            <div className="hidden peer-hover:block text-center text-gray-500 text-sm absolute top-[110%] left-1/2 -translate-x-1/2 w-[150px] bg-white border border-gray-300 rounded-md p-2 shadow-lg z-10">
+                                当月支払を確認します
+
+                            </div>
                         </div>
                     </div>
                     <div>

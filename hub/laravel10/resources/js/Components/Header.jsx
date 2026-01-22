@@ -7,14 +7,43 @@ import QA2 from '@/assets/help.png';
 import Logout from '@/assets/logout.png';
 import Logo from '@/assets/logo.png';
 import Logo2 from '@/assets/logo2.png';
+import { useState } from 'react';
+import { set } from 'zod';
 
 
 export default function Header({auth}) {
 
-
+    const [Option, setOption] = useState('');
     const handleLogout = (e) => {
         e.preventDefault();
         router.post('/ログアウト'); // 送 POST /logout 到 Laravel
+    }
+
+    const handelChange = (e) => {
+        const value = e.target.value;
+        setOption(value);
+
+        if (!value) return;
+        const el = document.getElementById(value);
+        if (!el) return;
+
+        const headerHeight = 80; // 你的 fixed header 高度
+        const elementRect = el.getBoundingClientRect();
+        const elementTop = elementRect.top + window.scrollY;
+        const elementHeight = elementRect.height;
+
+        const viewportHeight = window.innerHeight;
+
+        const scrollTo =
+            elementTop
+            - headerHeight
+            - (viewportHeight / 2)
+            + (elementHeight / 2);
+
+        window.scrollTo({
+            top: scrollTo,
+            behavior: 'smooth',
+        });
     }
 
 
@@ -27,7 +56,21 @@ export default function Header({auth}) {
                 }
                 {
                     /* 導航連結 */
-                    auth.user && <p className="text-white">ようこそ、<span className="text-white font-bold mx-2">{auth.user.name}</span>さん</p>
+                    auth.user ? <p className="text-white">ようこそ、<span className="text-white font-bold mx-2">{auth.user.name}</span>さん</p> : <>
+                    <select className=' sm:hidden border-0 bg-transparent shadow-none py-1 rounded-[10px]' onChange={handelChange} value={Option}>
+                        <option  value="">メニュー</option>
+                        <option value="home" >Home</option>
+                        <option value="news">News</option>
+                        <option value="aboutus">About Us</option>
+                    </select>
+                    <div className=' hidden sm:block'>
+                        <nav className="space-x-4 text-sm font-medium flex items-center px-[15px]">
+                            <a href="#home" className="text-black hover:text-gray-900">ホーム</a>
+                            <a href="#news" className="text-black hover:text-gray-900">ニュース</a>
+                            <a href="#aboutus" className="text-black hover:text-gray-900">私たちに関しては</a>
+                        </nav>
+                    </div>
+                    </>
                 }
                 <nav className="space-x-4 text-sm font-medium flex items-center px-[15px]">
                     {

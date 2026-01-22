@@ -11,7 +11,7 @@ export default function QandA({auth, grouped}) {
         <>
             <Head title="Q&Aページ" />
             <MainLayout auth={auth}>
-                <main className="flex flex-col items-center justify-center pt-[5em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto ">
+                <main className="flex flex-col items-center justify-center pt-[6em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto ">
                     <div className="min-h-screen flex flex-col items-center bg-gray-100 mt-10">
                         <h1 className="text-3xl font-bold mb-6">問い合わせ</h1>
                         {Object.entries(grouped).map(([key,item]) => (

@@ -103,7 +103,7 @@ export default function ArrivalHistory({ auth, arrivalMonthly }) {
         <>
             <Head title="入荷履歴" />
             <MainLayout auth={auth}>
-                <main className="relative flex flex-col items-center  pt-[5em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto h-full ">
+                <main className="relative flex flex-col items-center  pt-[6em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto h-full ">
                     <h2 className="text-2xl font-bold mb-4">入荷履歴一覧</h2>
                     <div className="w-full flex items-center justify-around mb-4">
                         <button onClick={prevPage}>前</button>
@@ -121,7 +121,7 @@ export default function ArrivalHistory({ auth, arrivalMonthly }) {
                         {weeks.map((week) => (
                             <div key={week} className="mb-2 w-full flex justify-start justify-around">
                                 {week.map((day, idx) => (
-                                    <Link href={route('ArrivalDetail', { date: currentDate.date(day).format("YYYY-MM-DD") }) } key={idx} className="inline-block w-[60px] h-[100px] text-center align-top leading-[50px] border border-gray-300 rounded-lg m-[1px] cursor-pointer">
+                                    <Link href={route('ArrivalDetail', { date: currentDate.date(day).format("YYYY-MM-DD") }) } key={idx} { ...day ? {className: "inline-block w-[60px] h-[100px] text-center align-top leading-[50px] border border-gray-300 rounded-lg m-[1px] cursor-pointer"} : {className: "inline-block w-[60px] h-[100px] text-center align-top leading-[50px] border border-gray-300 rounded-lg m-[1px] bg-gray-300 cursor-pointer"}} >
                                         {day ? day : ""}
                                         {getEventCountByDay(day) > 0 && (
                                             <div className="mt-2">

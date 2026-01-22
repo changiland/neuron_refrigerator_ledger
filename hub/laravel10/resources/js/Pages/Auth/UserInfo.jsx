@@ -63,14 +63,14 @@ export default function UserInfo({ auth, user }) {
             <Head title="ユーザー情報" />
             <MainLayout auth={auth}>
 
-                <main className="relative w-[500px] pt-[5em]">
+                <main className="relative w-[500px] pt-[6em]">
                     <h1 className="flex justify-center text-2xl font-bold mb-4">個人情報ページ</h1>
                     <div className="flex p-2 w-[40rem]">
                         <h3 className="px-[10px] py-2">name:</h3>
                         {isEditingNamme ? <input className="border p-2 rounded-[15px] w-[80%]" onChange={handleChange} value={name}/> :  <p className="border p-2 rounded-[15px] w-[21em]">{name}</p> }
 
-                        <button className="w-[20%] bg-blue-300 border rounded-[15px] mx-3" onClick={handleClick}>{isEditingNamme ? '保存' : '変更する'}</button>
-                        {isEditingNamme ? <button className="w-[20%] bg-blue-300 border rounded-[15px] mx-3" onClick={cancelClick}>取消</button> : null}
+                        <button className="w-[20%] bg-blue-300 border rounded-[15px] mx-3 hover:bg-blue-400 hover:text-white" onClick={handleClick}>{isEditingNamme ? '保存' : '変更する'}</button>
+                        {isEditingNamme ? <button className="w-[20%] bg-blue-300 border rounded-[15px] mx-3 hover:bg-blue-400 hover:text-white" onClick={cancelClick}>取消</button> : null}
 
                     </div>
                     <div className="flex p-2">
@@ -81,8 +81,8 @@ export default function UserInfo({ auth, user }) {
                         <h3 className="px-[10px] py-2">パスワードの更新：</h3>
                         <div>
                             {/* 按鈕叫出彈窗 */}
-                            <button  onClick={() => setOpen(true)} className="w-[20%] px-[10px] py-2 bg-blue-300 border rounded-[15px] w-[20rem]">
-                                <p className="flex justify-center">パスワードの更新</p>
+                            <button  onClick={() => setOpen(true)} className="w-[20%] px-[10px] py-2 bg-blue-300 border rounded-[15px] w-[20rem] hover:text-white hover:bg-blue-400">
+                                <p className="flex justify-center ">パスワードの更新</p>
                             </button>
                             {/* 彈窗 */}
                                 <Popup open={open} onClose={() => setOpen(false)}>

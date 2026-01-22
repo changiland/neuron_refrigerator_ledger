@@ -109,4 +109,4 @@ Route::get('/AdminPage/NewsForm', [NewsController::class, 'index'])->name('NewsF
 Route::post('/news/store', [NewsController::class, 'store'])->name('news.store');
 Route::get('/AdminPage/AdminProduct', [InventoryController::class, 'index'])->name('AdminProduct');
 Route::post('/products/store', [InventoryController::class, 'store'])->name('products.store');
-Route::post('/products/updata', [InventoryController::class, 'updata'])->name('products.updata');
+Route::post('/products/update', [InventoryController::class, 'update'])->name('products.update');
