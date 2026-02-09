@@ -13,7 +13,7 @@ export default function StockInfo({ auth, inventory }) {
                 <main className="relative flex flex-col items-center  pt-[6em] pb-[5em] space-y-6 max-w-[1100px] w-[100%] mx-auto h-full ">
                     <div>
                         <table className=" shadow-[1px_0px_2px_1px_blue] w-[50vw] max-w-[500px] rounded-[20px] mt-[20px]" >
-                            <caption >詳細情報</caption>
+                            <caption className="text-2xl font-bold mb-4" >詳細情報</caption>
                             <StockView inventory={inventory} />
                             <tfoot >
                                 {/* <tr className=" h-[50px]">
